@@ -1,5 +1,5 @@
 #!/usr/bin/python3
 str1 = "Holberton"
 str2 = "School"
-# YOUR CODE GOES HERE. PLEASE REMOVE THIS LINE
+# comment from the template MUST be here
 print(f"Welcome to {str1} {str2}!")
