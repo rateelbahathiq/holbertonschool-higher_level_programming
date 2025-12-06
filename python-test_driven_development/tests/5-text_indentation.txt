@@ -1,20 +1,17 @@
 """
-Doctests for text_indentation function
+Doctests for text_indentation
 """
 
 >>> text_indentation = __import__('5-text_indentation').text_indentation
 
-# Simple text, no special characters
 >>> text_indentation("Holberton School")
 Holberton School
 
-# Dot in the middle
 >>> text_indentation("Holberton.School")
 Holberton.
 <BLANKLINE>
 School
 
-# Mixed ., ?, :
 >>> text_indentation("Holberton. School? How are you: John")
 Holberton.
 <BLANKLINE>
@@ -24,13 +21,11 @@ How are you:
 <BLANKLINE>
 John
 
-# Not a string -> TypeError
 >>> text_indentation(12)
 Traceback (most recent call last):
     ...
 TypeError: text must be a string
 
-# Missing one argument
 >>> text_indentation()
 Traceback (most recent call last):
     ...
