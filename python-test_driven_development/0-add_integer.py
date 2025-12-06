@@ -3,14 +3,13 @@
 Adds two integers or floats.
 Floats are cast to integers.
 Validates input types first.
-Returns an integer result.
-"""
+Returns an integer result."""
 
 
 def add_integer(a, b=98):
     """Add two integers or floats as integers.
-Floats are cast to integers before addition.
-Return the integer sum of a and b."""
+    Floats are cast to integers before addition.
+    Return the integer sum of a and b."""
     if not isinstance(a, (int, float)):
         raise TypeError("a must be an integer")
 
