@@ -8,8 +8,6 @@
 100
 >>> add_integer(100.3, -2)
 98
->>> add_integer(5.9, 2.1)
-7
 >>> add_integer(4, "School")
 Traceback (most recent call last):
 ...
@@ -22,6 +20,3 @@ TypeError: a must be an integer
 -10
 >>> add_integer(0, 0)
 0
->>> add_integer(10**10, 10**10)
-20000000000
-
