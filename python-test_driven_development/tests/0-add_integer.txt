@@ -1,5 +1,10 @@
+"""
+Doctests for add_integer function.
+"""
+
 >>> add_integer = __import__('0-add_integer').add_integer
 
+# normal cases
 >>> add_integer(1, 2)
 3
 >>> add_integer(100, -2)
@@ -8,15 +13,25 @@
 100
 >>> add_integer(100.3, -2)
 98
+
+# type errors
+>>> add_integer("3", 1)
+Traceback (most recent call last):
+    ...
+TypeError: a must be an integer
 >>> add_integer(4, "School")
 Traceback (most recent call last):
-...
+    ...
 TypeError: b must be an integer
->>> add_integer(None)
+
+# float overflow: float('inf')
+>>> add_integer(float('inf'), 2)
 Traceback (most recent call last):
-...
-TypeError: a must be an integer
->>> add_integer(-5, -5)
--10
->>> add_integer(0, 0)
-0
+    ...
+OverflowError: cannot convert float infinity to integer
+
+# NaN: cannot convert float NaN to integer
+>>> add_integer(float('nan'), 2)
+Traceback (most recent call last):
+    ...
+ValueError: cannot convert float NaN to integer
