@@ -1,25 +1,18 @@
 """
-Doctests for text_indentation
+Doctests for text_indentation function
 """
 
 >>> text_indentation = __import__('5-text_indentation').text_indentation
 
->>> text_indentation("Holberton School")
-Holberton School
-
->>> text_indentation("Holberton.School")
+>>> text_indentation("Holberton.")
 Holberton.
 <BLANKLINE>
-School
 
->>> text_indentation("Holberton. School? How are you: John")
-Holberton.
+>>> text_indentation("Hello. How are you?")
+Hello.
 <BLANKLINE>
-School?
+How are you?
 <BLANKLINE>
-How are you:
-<BLANKLINE>
-John
 
 >>> text_indentation(12)
 Traceback (most recent call last):

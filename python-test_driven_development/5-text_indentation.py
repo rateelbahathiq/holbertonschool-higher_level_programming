@@ -14,7 +14,6 @@ def text_indentation(text):
     Raises:
         TypeError: if text is not a string
     """
-
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
@@ -22,9 +21,12 @@ def text_indentation(text):
     for char in text:
         buffer += char
         if char in ".?:":
+            # print the current sentence, stripped, followed by a blank line
             print(buffer.strip())
             print()
             buffer = ""
 
-    if buffer.strip() != "":
-        print(buffer.strip())
+    # Print remaining text (if any) WITHOUT extra newline at the end
+    remaining = buffer.strip()
+    if remaining != "":
+        print(remaining, end="")
