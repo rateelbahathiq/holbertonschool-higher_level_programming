@@ -5,7 +5,7 @@
 class Rectangle:
     """Represent a rectangle with width and height."""
 
-    number_of_instances = 0  
+    number_of_instances = 0  # Public class attribute
 
     def __init__(self, width=0, height=0):
         """Initialize a new rectangle."""
