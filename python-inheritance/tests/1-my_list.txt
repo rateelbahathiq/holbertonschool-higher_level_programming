@@ -1,1 +1,64 @@
-Prints the list sorted in ascending order without modifying the original list.
+This file contains doctests for MyList.
+
+>>> MyList = __import__('1-my_list').MyList
+
+# check instantiation
+>>> my_list = MyList()
+>>> isinstance(my_list, MyList)
+True
+
+# check inherits from list
+>>> issubclass(MyList, list)
+True
+>>> isinstance(my_list, list)
+True
+
+# check __str__ and append()
+>>> my_list.append(1)
+>>> my_list.append(4)
+>>> my_list.append(2)
+>>> my_list.append(3)
+>>> my_list.append(5)
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+
+# check print_sorted() with not sorted append (should not modify original)
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+
+# check print_sorted() with already sorted list
+>>> my_list2 = MyList([1, 2, 3])
+>>> my_list2.print_sorted()
+[1, 2, 3]
+>>> print(my_list2)
+[1, 2, 3]
+
+# check print_sorted() with negative numbers
+>>> my_list3 = MyList([3, -1, 2, 0])
+>>> my_list3.print_sorted()
+[-1, 0, 2, 3]
+>>> print(my_list3)
+[3, -1, 2, 0]
+
+# check print_sorted() with empty list
+>>> my_list4 = MyList()
+>>> my_list4.print_sorted()
+[]
+>>> print(my_list4)
+[]
+
+# check print_sorted() returns None (doesn't return a new list)
+>>> import io
+>>> import contextlib
+>>> my_list5 = MyList([3, 1])
+>>> buf = io.StringIO()
+>>> with contextlib.redirect_stdout(buf):
+...     r = my_list5.print_sorted()
+>>> r is None
+True
+>>> buf.getvalue().strip()
+'[1, 3]'
+>>> print(my_list5)
+[3, 1]
