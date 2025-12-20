@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 from abc import ABC, abstractmethod
 import math
 
@@ -9,12 +9,12 @@ class Shape(ABC):
     @abstractmethod
     def area(self):
         """Return the area of the shape."""
-        raise NotImplementedError
+        pass
 
     @abstractmethod
     def perimeter(self):
         """Return the perimeter of the shape."""
-        raise NotImplementedError
+        pass
 
 
 class Circle(Shape):
@@ -50,7 +50,5 @@ class Rectangle(Shape):
 
 def shape_info(shape):
     """Print the area and perimeter of any shape-like object."""
-    area = shape.area()
-    perimeter = shape.perimeter()
-    print("Area: {}".format(area))
-    print("Perimeter: {}".format(perimeter))
+    print("Area: {}".format(shape.area()))
+    print("Perimeter: {}".format(shape.perimeter()))
