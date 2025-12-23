@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Module that defines the Student class."""
-      
+
 
 class Student:
     """Class that defines a student."""
