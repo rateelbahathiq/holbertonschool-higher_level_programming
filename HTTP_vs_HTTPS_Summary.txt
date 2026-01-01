@@ -1,0 +1,33 @@
+HTTP and HTTPS - Summary
+
+HTTP (HyperText Transfer Protocol) is the way web browsers and websites talk to each other. But it's not safe because anyone watching the network can read the messages.
+
+HTTPS (HTTP Secure) is like HTTP, but it adds a lock using something called SSL/TLS encryption. This keeps the data private and protected, so no one else can read or change it. Websites that deal with personal or sensitive information — like banks or email services — always use HTTPS to keep users safe.
+
+Structure of an HTTP Request and Response
+
+HTTP Request (What the browser sends to the website):
+GET /index.html HTTP/1.1
+Host: www.example.com
+User-Agent: Chrome
+Accept: text/html
+
+HTTP Response (What the website sends back):
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1256
+
+Common HTTP Methods and What They Do
+
+GET     - Get data from the server        (e.g. viewing a webpage)
+POST    - Send data to the server         (e.g. submitting a form)
+PUT     - Update data on the server       (e.g. editing your profile)
+DELETE  - Delete data on the server       (e.g. deleting a comment)
+
+Common HTTP Status Codes and What They Mean
+
+200 OK           - Everything worked; the page loaded fine
+301 Moved        - The page has a new address
+403 Forbidden    - You’re not allowed to see this page
+404 Not Found    - The page or file doesn’t exist
+500 Server Error - The website has a problem
