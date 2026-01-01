@@ -21,10 +21,10 @@ Example Output:
 Status Code: 200 <br>
 sunt aut facere repellat provident occaecati excepturi optio reprehenderit <br>
 qui est esse <br>
-ea molestias quasi exercitationem repellat qui ipsa sit aut
-eum et est occaecati
-nesciunt quas odio
-dolorem eum magni eos aperiam quia
-...
-A posts.csv file is also created containing columns:
+ea molestias quasi exercitationem repellat qui ipsa sit aut<br>
+eum et est occaecati<br>
+nesciunt quas odio<br>
+dolorem eum magni eos aperiam quia<br>
+... <br>
+A posts.csv file is also created containing columns:<br>
 id, title, body
