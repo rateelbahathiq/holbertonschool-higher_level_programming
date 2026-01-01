@@ -5,12 +5,12 @@ import json
 class SimpleAPIHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
-        # Set base status and headers
         if self.path == '/':
             self.send_response(200)
             self.send_header("Content-Type", "text/plain")
             self.end_headers()
-            self.wfile.write(b"Hello, this is a simple API!")
+            message = "Hello, this is a simple API!\n"
+            self.wfile.write(message.encode())
 
         elif self.path == '/data':
             self.send_response(200)
@@ -47,7 +47,7 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
             self.send_header("Content-Type", "application/json")
             self.end_headers()
             error = {
-                "error": "Endpoint not found"
+                "error": "Not found"
             }
             self.wfile.write(json.dumps(error).encode())
 
