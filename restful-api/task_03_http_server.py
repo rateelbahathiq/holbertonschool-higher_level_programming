@@ -9,8 +9,8 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "text/plain")
             self.end_headers()
-            message = "Hello, this is a simple API!\n"
-            self.wfile.write(message.encode())
+            # No newline, no extra space
+            self.wfile.write(b"Hello, this is a simple API!")
 
         elif self.path == '/data':
             self.send_response(200)
@@ -21,7 +21,8 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
                 "age": 30,
                 "city": "New York"
             }
-            self.wfile.write(json.dumps(data).encode())
+            self.wfile.write(json.dumps(data, separators=(',', ':')).encode())
+            # separators=(',', ':') removes spaces in JSON: {"key":"value"}
 
         elif self.path == '/status':
             self.send_response(200)
@@ -30,7 +31,7 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
             status = {
                 "status": "OK"
             }
-            self.wfile.write(json.dumps(status).encode())
+            self.wfile.write(json.dumps(status, separators=(',', ':')).encode())
 
         elif self.path == '/info':
             self.send_response(200)
@@ -40,7 +41,7 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
                 "version": "1.0",
                 "description": "A simple API built with http.server"
             }
-            self.wfile.write(json.dumps(info).encode())
+            self.wfile.write(json.dumps(info, separators=(',', ':')).encode())
 
         else:
             self.send_response(404)
@@ -49,7 +50,7 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
             error = {
                 "error": "Not found"
             }
-            self.wfile.write(json.dumps(error).encode())
+            self.wfile.write(json.dumps(error, separators=(',', ':')).encode())
 
 def run(server_class=HTTPServer, handler_class=SimpleAPIHandler, port=8000):
     server_address = ('', port)
