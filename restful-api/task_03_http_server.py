@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import json
 
 class SimpleAPIHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -13,8 +12,7 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
             self.wfile.write(content)
 
         elif self.path == '/data':
-            data = {"name": "John", "age": 30, "city": "New York"}
-            content = json.dumps(data, separators=(',', ':')).encode('utf-8')
+            content = b'{"name":"John","age":30,"city":"New York"}'
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.send_header("Content-Length", str(len(content)))
@@ -22,7 +20,6 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
             self.wfile.write(content)
 
         elif self.path == '/status':
-            # Exact format with no spaces, correct header, and content length
             content = b'{"status":"OK"}'
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
@@ -31,8 +28,7 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
             self.wfile.write(content)
 
         elif self.path == '/info':
-            data = {"version": "1.0", "description": "A simple API built with http.server"}
-            content = json.dumps(data, separators=(',', ':')).encode('utf-8')
+            content = b'{"version":"1.0","description":"A simple API built with http.server"}'
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.send_header("Content-Length", str(len(content)))
