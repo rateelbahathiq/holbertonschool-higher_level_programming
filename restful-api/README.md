@@ -18,9 +18,9 @@ Task 2: Using Python requests library to interact with an API
    - Created posts.csv with post data 
 
 Example Output:
-Status Code: 200
-sunt aut facere repellat provident occaecati excepturi optio reprehenderit
-qui est esse
+Status Code: 200 <br>
+sunt aut facere repellat provident occaecati excepturi optio reprehenderit <br>
+qui est esse <br>
 ea molestias quasi exercitationem repellat qui ipsa sit aut
 eum et est occaecati
 nesciunt quas odio
@@ -28,5 +28,3 @@ dolorem eum magni eos aperiam quia
 ...
 A posts.csv file is also created containing columns:
 id, title, body
-and each row represents a post from the API.
-
