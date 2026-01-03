@@ -1,61 +1,61 @@
 #!/usr/bin/env python3
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import json
+"""
+Simple Flask API for managing users in memory.
+Supports adding users, checking status, listing usernames, and retrieving user info.
+"""
 
-class SimpleAPIHandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        # / endpoint
-        if self.path == '/':
-            response = "Hello, this is a simple API!"
-            self.send_response(200)
-            self.send_header("Content-Type", "text/plain")
-            self.send_header("Content-Length", str(len(response.encode())))
-            self.end_headers()
-            self.wfile.write(response.encode())
+from flask import Flask, jsonify, request
 
-        # /data endpoint
-        elif self.path == '/data':
-            data = {"name": "John", "age": 30, "city": "New York"}
-            response = json.dumps(data, separators=(',', ':'), ensure_ascii=False)
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Content-Length", str(len(response.encode())))
-            self.end_headers()
-            self.wfile.write(response.encode())
+app = Flask(__name__)
 
-        # /status endpoint
-        elif self.path == '/status':
-            response = json.dumps({"status": "OK"}, separators=(',', ':'), ensure_ascii=False)
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Content-Length", str(len(response.encode())))
-            self.end_headers()
-            self.wfile.write(response.encode())
+# In-memory user storage using a dictionary
+users = {}
 
-        # /info endpoint
-        elif self.path == '/info':
-            data = {"version": "1.0", "description": "A simple API built with http.server"}
-            response = json.dumps(data, separators=(',', ':'), ensure_ascii=False)
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Content-Length", str(len(response.encode())))
-            self.end_headers()
-            self.wfile.write(response.encode())
+# Root route — confirms the server is running
+@app.route("/", methods=["GET"])
+def home():
+    return "Welcome to the Flask API!"
 
-        # 404 handler
-        else:
-            response = json.dumps({"error": "Not found"}, separators=(',', ':'), ensure_ascii=False)
-            self.send_response(404)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Content-Length", str(len(response.encode())))
-            self.end_headers()
-            self.wfile.write(response.encode())
+# Returns a list of all usernames (keys in the users dictionary)
+@app.route("/data", methods=["GET"])
+def data():
+    return jsonify(list(users.keys())), 200
 
-def run(server_class=HTTPServer, handler_class=SimpleAPIHandler, port=8000):
-    print(f"Starting server at http://localhost:{port}")
-    server_address = ('', port)
-    httpd = server_class(server_address, handler_class)
-    httpd.serve_forever()
+# Simple health-check route
+@app.route("/status", methods=["GET"])
+def status():
+    return "OK", 200
 
+# Returns user info for a given username, or 404 if not found
+@app.route("/users/<username>", methods=["GET"])
+def get_user(username):
+    if username in users:
+        return jsonify(users[username]), 200
+    return jsonify({"error": "User not found"}), 404
+
+# Adds a new user from a POSTed JSON body
+@app.route("/add_user", methods=["POST"])
+def add_user():
+    new_user = request.get_json()
+
+    # If the JSON is not valid or empty
+    if not new_user:
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    # Check that "username" key is provided
+    if "username" not in new_user:
+        return jsonify({"error": "Username is required"}), 400
+
+    username = new_user["username"]
+
+    # Check if username already exists
+    if username in users:
+        return jsonify({"error": "Username already exists"}), 409
+
+    # Store the new user in the dictionary
+    users[username] = new_user
+    return jsonify({"message": "User added", "user": new_user}), 201
+
+# Run the Flask app on port 5000 and listen on all interfaces
 if __name__ == "__main__":
-    run()
+    app.run(host="0.0.0.0", port=5000, use_reloader=False)
