@@ -1,61 +1,72 @@
 #!/usr/bin/env python3
 """
-Simple Flask API for managing users in memory.
-Supports adding users, checking status, listing usernames, and retrieving user info.
+Simple HTTP server using Python's built-in http.server module.
+
+This server handles basic GET requests for a few fixed routes:
+- "/"          : returns a greeting message.
+- "/data"      : returns some example user data in JSON format.
+- "/status"    : returns a simple OK status.
+- "/info"      : returns version and description of the API.
+
+If a user accesses any other route, the server will return a 404 error.
 """
 
-from flask import Flask, jsonify, request
+import http.server
+import socketserver
+import json
 
-app = Flask(__name__)
+# Custom request handler
+class Server(http.server.BaseHTTPRequestHandler):
+    """
+    Handles HTTP GET requests and responds with data based on the requested path.
+    """
 
-# In-memory user storage using a dictionary
-users = {}
+    def do_GET(self):
+        """
+        Responds to GET requests:
+        - '/' returns a greeting message.
+        - '/data' returns a JSON with name, age, city.
+        - '/status' returns 'OK'.
+        - '/info' returns API version and description.
+        - any other path returns a 404 error with a custom message.
+        """
+        if self.path == '/':
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/plain')
+            self.end_headers()
+            self.wfile.write('Hello, this is a simple API!'.encode("utf-8"))
 
-# Root route — confirms the server is running
-@app.route("/", methods=["GET"])
-def home():
-    return "Welcome to the Flask API!"
+        elif self.path == '/data':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            data = {"name": "John", "age": 30, "city": "New York"}
+            self.wfile.write(json.dumps(data).encode("utf-8"))
 
-# Returns a list of all usernames (keys in the users dictionary)
-@app.route("/data", methods=["GET"])
-def data():
-    return jsonify(list(users.keys())), 200
+        elif self.path == '/status':
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/plain')
+            self.end_headers()
+            self.wfile.write("OK".encode("utf-8"))
 
-# Simple health-check route
-@app.route("/status", methods=["GET"])
-def status():
-    return "OK", 200
+        elif self.path == '/info':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            info = {
+                "version": "1.0",
+                "description": "A simple API built with http.server"
+            }
+            self.wfile.write(json.dumps(info).encode("utf-8"))
 
-# Returns user info for a given username, or 404 if not found
-@app.route("/users/<username>", methods=["GET"])
-def get_user(username):
-    if username in users:
-        return jsonify(users[username]), 200
-    return jsonify({"error": "User not found"}), 404
+        else:
+            self.send_response(404)
+            self.send_header('Content-Type', 'text/plain')
+            self.end_headers()
+            self.wfile.write("Endpoint not found".encode("utf-8"))
 
-# Adds a new user from a POSTed JSON body
-@app.route("/add_user", methods=["POST"])
-def add_user():
-    new_user = request.get_json()
-
-    # If the JSON is not valid or empty
-    if not new_user:
-        return jsonify({"error": "Invalid JSON"}), 400
-
-    # Check that "username" key is provided
-    if "username" not in new_user:
-        return jsonify({"error": "Username is required"}), 400
-
-    username = new_user["username"]
-
-    # Check if username already exists
-    if username in users:
-        return jsonify({"error": "Username already exists"}), 409
-
-    # Store the new user in the dictionary
-    users[username] = new_user
-    return jsonify({"message": "User added", "user": new_user}), 201
-
-# Run the Flask app on port 5000 and listen on all interfaces
+# Start the server on port 8000
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, use_reloader=False)
+    with socketserver.TCPServer(('', 8000), Server) as httpd:
+        print("Starting server at http://localhost:8000")
+        httpd.serve_forever()
