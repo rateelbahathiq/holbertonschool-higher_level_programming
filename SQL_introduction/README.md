@@ -1,4 +1,4 @@
-# ğŸ—ƒï¸ SQL - Introduction
+#  SQL - Introduction
 
 This project introduces the basics of **SQL** and **MySQL** by exploring how to create, manipulate, and query databases.
 
@@ -6,7 +6,7 @@ It is part of the **Holberton School** higher-level programming curriculum.
 
 ---
 
-## ğŸ“˜ Description
+##  Description
 
 SQL (Structured Query Language) is the standard language for interacting with relational databases.
 
@@ -21,11 +21,11 @@ In this project, you will learn how to:
 
 ---
 
-## ğŸ§± Files & Tasks
+## §± Files & Tasks
 
 Each SQL script below solves a specific task:
 
-| ğŸ“„ File | ğŸ“ Description |
+| File |  Description |
 |--------|----------------|
 | `0-list_databases.sql` | Lists all databases on the server |
 | `1-create_database_if_missing.sql` | Creates the database `hbtn_0c_0` if it doesn't exist |
@@ -45,7 +45,7 @@ Each SQL script below solves a specific task:
 | `15-groups.sql` | Groups records by `score` and counts how many share the same score |
 | `16-no_link.sql` | Lists records with non-empty `name`, sorted by `score` descending |
 
-## ğŸ’» Example Usage
+## » Example Usag
 
 <pre>
 -- 0-list_databases.sql -- Lists all databases
@@ -80,5 +80,5 @@ SELECT COUNT(*) FROM first_table WHERE id = 89;
 
 
 
-##¤ Author
+##  Author
 Rateel Bahathek
