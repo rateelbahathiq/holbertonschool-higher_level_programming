@@ -45,7 +45,7 @@ Each SQL script below solves a specific task:
 | `15-groups.sql` | Groups records by `score` and counts how many share the same score |
 | `16-no_link.sql` | Lists records with non-empty `name`, sorted by `score` descending |
 
-## » Exampls
+## » Exampes
 
 <pre>
 -- 0-list_databases.sql -- Lists all databases
