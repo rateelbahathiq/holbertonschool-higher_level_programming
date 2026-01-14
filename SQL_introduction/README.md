@@ -45,35 +45,40 @@ Each SQL script below solves a specific task:
 | `15-groups.sql` | Groups records by `score` and counts how many share the same score |
 | `16-no_link.sql` | Lists records with non-empty `name`, sorted by `score` descending |
 
-## Examples
+### 💻 Example Usage
 
--- 0-list_databases.sql
--- Lists all databases
+<pre>
+-- 0-list_databases.sql -- Lists all databases
 
 SHOW DATABASES;
 
 -- Output:
--- +--------------------+
--- | Database           |
--- +--------------------+
--- | information_schema |
--- | mysql              |
--- | performance_schema |
--- | sys                |
--- +--------------------+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+</pre>
 
--- 8-count_89.sql
--- Count how many times id = 89 appears in first_table
+---
+
+<pre>
+-- 8-count_89.sql -- Count how many times id = 89 appears in first_table
 
 SELECT COUNT(*) FROM first_table WHERE id = 89;
 
 -- Output:
--- +----------+
--- | COUNT(*) |
--- +----------+
--- |    3     |
--- +----------+
++----------+
+| COUNT(*) |
++----------+
+|    3     |
++----------+
+</pre>
 
 
-👤 Author
+
+##� Author
 Rateel Bahathek
