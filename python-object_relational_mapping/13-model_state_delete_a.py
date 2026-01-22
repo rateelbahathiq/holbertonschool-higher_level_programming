@@ -35,4 +35,3 @@ def delete_states_with_a(username, password, database):
 
 if __name__ == "__main__":
     delete_states_with_a(sys.argv[1], sys.argv[2], sys.argv[3])
-
