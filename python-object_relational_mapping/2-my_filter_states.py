@@ -11,7 +11,7 @@ import sys
 def filter_states(username, password, database, state_name):
     """
     Connects to a MySQL database and displays states
-    matching the given name.
+    matching the given name (case-sensitive).
     """
     db = MySQLdb.connect(
         host="localhost",
@@ -23,7 +23,7 @@ def filter_states(username, password, database, state_name):
     cursor = db.cursor()
 
     query = (
-        "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC"
+        "SELECT * FROM states WHERE BINARY name = '{}' ORDER BY id ASC"
         .format(state_name)
     )
     cursor.execute(query)
