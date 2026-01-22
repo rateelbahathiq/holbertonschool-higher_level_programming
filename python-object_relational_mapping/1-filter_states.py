@@ -11,10 +11,10 @@ import sys
 def filter_states(username, password, database):
     """
     Connects to a MySQL database and lists all states
-    whose names start with 'N', ordered by id.
+    whose names start with uppercase 'N', ordered by id.
     """
     db = MySQLdb.connect(
-        host="127.0.0.1",
+        host="localhost",
         port=3306,
         user=username,
         passwd=password,
@@ -22,7 +22,7 @@ def filter_states(username, password, database):
     )
     cursor = db.cursor()
     cursor.execute(
-        "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
+        "SELECT * FROM states WHERE BINARY name LIKE 'N%' ORDER BY id ASC"
     )
     states = cursor.fetchall()
 
