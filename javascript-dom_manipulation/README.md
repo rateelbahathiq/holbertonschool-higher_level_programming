@@ -62,8 +62,7 @@ Fetches a character from the Star Wars API and displays the name inside `#charac
 
 File: `6-script.js`
 
-API used:
-https://swapi-api.hbtn.io
+
 
 ---
 
@@ -80,8 +79,7 @@ Works even when script is loaded in `<head>`.
 
 File: `8-script.js`
 
-API used:
-https://hellosalut.stefanbohacek.com
+
 
 ---
 
